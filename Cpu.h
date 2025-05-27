@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <map>
 #include <string>
+#include "ALU.h"
 
 // forward declaration.
 class Memory;
@@ -10,10 +11,12 @@ class Memory;
 class CPU
 {
 private:
+  ALU alu;
   Memory *memory;
   std::map<std::string, int8_t> registers;
+  int16_t program_counter;
   int8_t fetch();
-  uint8_t decode(int8_t data) const;
+  uint8_t decode(uint8_t data);
   uint8_t execute(uint8_t opcode); // will return a binary number representing failure or success
 
 public:
